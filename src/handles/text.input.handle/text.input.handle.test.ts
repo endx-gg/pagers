@@ -8,35 +8,18 @@ test.beforeEach((t) => {
 });
 
 test("implements basic behaviour", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  await handle.testHandleImplementsBasicBehaviour({ assertEquals: t.deepEqual });
+  await t.context.handle.testHandleImplementsBasicBehaviour({ assertEquals: t.deepEqual });
 });
 
 test("implements errors behaviour", async (t) => {
-  const {
-    context: { handle },
-  } = t;
+  const erroFlow = async () => {
+    t.context.handle.setValue("value that causes an error");
+    return "Error";
+  };
 
-  await handle.testHandleImplementsErrorsBehaviour(
-    async () => {
-      handle.setValue("value that causes an error");
-      return "Error";
-    },
-    {
-      assertEquals: t.deepEqual,
-    }
-  );
+  await t.context.handle.testHandleImplementsErrorsBehaviour(erroFlow, { assertEquals: t.deepEqual });
 });
 
 test("implements focus behaviour", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  await handle.testHandleImplementsFocusBehaviour({
-    assertEquals: t.deepEqual,
-  });
+  await t.context.handle.testHandleImplementsFocusBehaviour({ assertEquals: t.deepEqual });
 });
