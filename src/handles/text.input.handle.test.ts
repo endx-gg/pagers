@@ -12,8 +12,11 @@ class TestTextInputHandle extends TextInputHandle {
     return this.value;
   }
   async getErrorMessage(): Promise<string | null> {
-    if (this.value === "value that causes an error") return "Error";
+    if (await this.hasError()) return "Error";
     return this.error;
+  }
+  async hasError(): Promise<boolean> {
+    return this.value === "value that causes an error";
   }
 }
 
@@ -23,7 +26,7 @@ test.beforeEach((t) => {
   t.context.handle = new TestTextInputHandle();
 });
 
-test("returns null if no value has been set", async (t) => {
+test("#getValue returns null if no value has been set", async (t) => {
   const {
     context: { handle },
   } = t;
@@ -31,7 +34,7 @@ test("returns null if no value has been set", async (t) => {
   t.is(await handle.getValue(), null);
 });
 
-test("sets value", async (t) => {
+test("#setValue sets value", async (t) => {
   const {
     context: { handle },
   } = t;
@@ -40,7 +43,15 @@ test("sets value", async (t) => {
   t.is(await handle.getValue(), "test");
 });
 
-test("returns null if no error is present", async (t) => {
+test("#hasError returns false if no error is present", async (t) => {
+  const {
+    context: { handle },
+  } = t;
+
+  t.false(await handle.hasError());
+});
+
+test("#getErrorMessagee returns null if no error is present", async (t) => {
   const {
     context: { handle },
   } = t;
@@ -48,7 +59,7 @@ test("returns null if no error is present", async (t) => {
   t.is(await handle.getErrorMessage(), null);
 });
 
-test("returns error message", async (t) => {
+test("#getErrorMessage returns error message", async (t) => {
   const {
     context: { handle },
   } = t;
