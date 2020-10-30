@@ -4,4 +4,5 @@ export interface IInputHandle {
   hasError(): Promise<boolean>;
   blur(): Promise<void>;
   setValue(value: any): Promise<void>;
+  isFocused(): Promise<boolean>;
 }

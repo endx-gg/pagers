@@ -27,4 +27,7 @@ export abstract class TextInputHandle implements ITextInputHandle {
   hasError(): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
+  isFocused(): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
 }

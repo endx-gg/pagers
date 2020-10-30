@@ -4,6 +4,7 @@ import { TextInputHandle } from "./text.input.handle";
 class TestTextInputHandle extends TextInputHandle {
   private value: string | null = null;
   private error: string | null = null;
+  private _isFocused: boolean = false;
 
   async setValue(value: string): Promise<void> {
     this.value = value;
@@ -15,8 +16,14 @@ class TestTextInputHandle extends TextInputHandle {
     if (await this.hasError()) return "Error";
     return this.error;
   }
+  async focus(): Promise<void> {
+    this._isFocused = true;
+  }
   async hasError(): Promise<boolean> {
     return this.value === "value that causes an error";
+  }
+  async isFocused(): Promise<boolean> {
+    return this._isFocused;
   }
 }
 
@@ -66,4 +73,13 @@ test("#getErrorMessage returns error message", async (t) => {
 
   await t.context.handle.setValue("value that causes an error");
   t.is(await handle.getErrorMessage(), "Error");
+});
+
+test("#focus focuses input", async (t) => {
+  const {
+    context: { handle },
+  } = t;
+
+  await t.context.handle.focus();
+  t.true(await handle.isFocused());
 });

@@ -39,4 +39,7 @@ export abstract class NumberRangeInputHandle
   setValue(value: any): Promise<void> {
     throw new Error("Method not implemented.");
   }
+  isFocused(): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
 }
