@@ -1,9 +1,8 @@
 import { IInputHandle } from "./input.handle";
-import { INumberInputHandle } from "./number.input.handle";
 
 export interface INumberRangeInputHandle extends IInputHandle {
   getValue(): Promise<[number, number]>;
-  getError(): Promise<string>;
+  getErrorMessage(): Promise<string | null>;
   blur(): Promise<void>;
   setFirstValue(value: number): Promise<void>;
   setLastValue(value: number): Promise<void>;
@@ -16,7 +15,7 @@ export abstract class NumberRangeInputHandle
   getValue(): Promise<[number, number]> {
     throw new Error("Method not implemented.");
   }
-  getError(): Promise<string> {
+  getErrorMessage(): Promise<string | null> {
     throw new Error("Method not implemented.");
   }
   blur(): Promise<void> {

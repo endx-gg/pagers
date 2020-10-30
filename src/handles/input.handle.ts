@@ -1,6 +1,6 @@
 export interface IInputHandle {
   getValue(): Promise<any>;
-  getError(): Promise<string>;
+  getErrorMessage(): Promise<string | null>;
   hasError(): Promise<boolean>;
   blur(): Promise<void>;
   setValue(value: any): Promise<void>;
