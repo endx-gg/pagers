@@ -19,6 +19,9 @@ class TestTextInputHandle extends TextInputHandle {
   async focus(): Promise<void> {
     this._isFocused = true;
   }
+  async blur(): Promise<void> {
+    this._isFocused = false;
+  }
   async hasError(): Promise<boolean> {
     return this.value === "value that causes an error";
   }
@@ -82,4 +85,14 @@ test("#focus focuses input", async (t) => {
 
   await t.context.handle.focus();
   t.true(await handle.isFocused());
+});
+
+test("#blur blurs input", async (t) => {
+  const {
+    context: { handle },
+  } = t;
+
+  await t.context.handle.focus();
+  await t.context.handle.blur();
+  t.false(await handle.isFocused());
 });
