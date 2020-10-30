@@ -8,6 +8,10 @@ export interface ITextInputHandle extends IInputHandle {
   focus(): Promise<void>;
 }
 
+interface ITestOptions {
+  assertEquals: <T>(actual: T, expected: T) => void;
+}
+
 export abstract class TextInputHandle implements ITextInputHandle {
   getValue(): Promise<string | null> {
     throw new Error("Method not implemented.");
@@ -29,5 +33,19 @@ export abstract class TextInputHandle implements ITextInputHandle {
   }
   isFocused(): Promise<boolean> {
     throw new Error("Method not implemented.");
+  }
+
+  async testImplementsBasicBehaviour(options: ITestOptions): Promise<void> {
+    options.assertEquals(await this.getValue(), null);
+    await this.setValue("test");
+    options.assertEquals(await this.getValue(), "test");
+  }
+
+  async testImplementsErrorsBehaviour(errorFlow: () => Promise<string>, options: ITestOptions): Promise<void> {
+    options.assertEquals(await this.hasError(), false);
+    options.assertEquals(await this.getErrorMessage(), null);
+    const errorMessage = await errorFlow();
+    options.assertEquals(await this.hasError(), true);
+    options.assertEquals(await this.getErrorMessage(), errorMessage);
   }
 }

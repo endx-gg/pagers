@@ -7,46 +7,28 @@ test.beforeEach((t) => {
   t.context.handle = new TestTextInputHandle();
 });
 
-test("#getValue returns null if no value has been set", async (t) => {
+test("implements basic behaviour", async (t) => {
   const {
     context: { handle },
   } = t;
 
-  t.is(await handle.getValue(), null);
+  await handle.testImplementsBasicBehaviour({ assertEquals: t.deepEqual });
 });
 
-test("#setValue sets value", async (t) => {
+test("implements errors behaviour", async (t) => {
   const {
     context: { handle },
   } = t;
 
-  await handle.setValue("test");
-  t.is(await handle.getValue(), "test");
-});
-
-test("#hasError returns false if no error is present", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  t.false(await handle.hasError());
-});
-
-test("#getErrorMessagee returns null if no error is present", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  t.is(await handle.getErrorMessage(), null);
-});
-
-test("#getErrorMessage returns error message", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  await handle.setValue("value that causes an error");
-  t.is(await handle.getErrorMessage(), "Error");
+  await handle.testImplementsErrorsBehaviour(
+    async () => {
+      handle.setValue("value that causes an error");
+      return "Error";
+    },
+    {
+      assertEquals: t.deepEqual,
+    }
+  );
 });
 
 test("#focus focuses input", async (t) => {
