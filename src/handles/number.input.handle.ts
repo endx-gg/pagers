@@ -5,4 +5,5 @@ export interface INumberInputHandle extends IInputHandle {
   getError(): Promise<string>;
   blur(): Promise<void>;
   setValue(value: number): Promise<void>;
+  focus(): Promise<void>;
 }

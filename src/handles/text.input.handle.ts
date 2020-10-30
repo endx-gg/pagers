@@ -5,4 +5,5 @@ export interface ITextInputHandle extends IInputHandle {
   getError(): Promise<string>;
   blur(): Promise<void>;
   setValue(value: string): Promise<void>;
+  focus(): Promise<void>;
 }
