@@ -7,7 +7,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "test:watch": "ava --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && ava"
   },
   "author": "EL Passion",
   "license": "ISC",

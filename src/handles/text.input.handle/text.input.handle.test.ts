@@ -1,34 +1,5 @@
 import anyTest, { TestInterface } from "ava";
-import { TextInputHandle } from "./text.input.handle";
-
-class TestTextInputHandle extends TextInputHandle {
-  private value: string | null = null;
-  private error: string | null = null;
-  private _isFocused: boolean = false;
-
-  async setValue(value: string): Promise<void> {
-    this.value = value;
-  }
-  async getValue(): Promise<string | null> {
-    return this.value;
-  }
-  async getErrorMessage(): Promise<string | null> {
-    if (await this.hasError()) return "Error";
-    return this.error;
-  }
-  async focus(): Promise<void> {
-    this._isFocused = true;
-  }
-  async blur(): Promise<void> {
-    this._isFocused = false;
-  }
-  async hasError(): Promise<boolean> {
-    return this.value === "value that causes an error";
-  }
-  async isFocused(): Promise<boolean> {
-    return this._isFocused;
-  }
-}
+import { TestTextInputHandle } from "./test.handle";
 
 const test = anyTest as TestInterface<{ handle: TestTextInputHandle }>;
 
@@ -49,7 +20,7 @@ test("#setValue sets value", async (t) => {
     context: { handle },
   } = t;
 
-  await t.context.handle.setValue("test");
+  await handle.setValue("test");
   t.is(await handle.getValue(), "test");
 });
 
@@ -74,7 +45,7 @@ test("#getErrorMessage returns error message", async (t) => {
     context: { handle },
   } = t;
 
-  await t.context.handle.setValue("value that causes an error");
+  await handle.setValue("value that causes an error");
   t.is(await handle.getErrorMessage(), "Error");
 });
 
@@ -83,7 +54,7 @@ test("#focus focuses input", async (t) => {
     context: { handle },
   } = t;
 
-  await t.context.handle.focus();
+  await handle.focus();
   t.true(await handle.isFocused());
 });
 
@@ -92,7 +63,7 @@ test("#blur blurs input", async (t) => {
     context: { handle },
   } = t;
 
-  await t.context.handle.focus();
-  await t.context.handle.blur();
+  await handle.focus();
+  await handle.blur();
   t.false(await handle.isFocused());
 });

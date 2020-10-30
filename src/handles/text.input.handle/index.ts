@@ -1,4 +1,4 @@
-import { IInputHandle } from "./input.handle";
+import { IInputHandle } from "../input.handle";
 
 export interface ITextInputHandle extends IInputHandle {
   getValue(): Promise<string | null>;
