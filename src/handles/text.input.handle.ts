@@ -1,7 +1,7 @@
 import { IInputHandle } from "./input.handle";
 
 export interface ITextInputHandle extends IInputHandle {
-  getValue(): Promise<string>;
+  getValue(): Promise<string | null>;
   getError(): Promise<string>;
   blur(): Promise<void>;
   setValue(value: string): Promise<void>;
@@ -9,7 +9,7 @@ export interface ITextInputHandle extends IInputHandle {
 }
 
 export abstract class TextInputHandle implements ITextInputHandle {
-  getValue(): Promise<string> {
+  getValue(): Promise<string | null> {
     throw new Error("Method not implemented.");
   }
   getError(): Promise<string> {
