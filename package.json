@@ -5,11 +5,22 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
+    "watch": "tsc --watch",
+    "test:watch": "ava --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "EL Passion",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.9.3"
+    "@ava/typescript": "^1.1.1",
+    "ava": "^3.13.0",
+    "typescript": "^3.9.7"
+  },
+  "ava": {
+    "typescript": {
+      "rewritePaths": {
+        "src/": "lib/"
+      }
+    }
   }
 }
