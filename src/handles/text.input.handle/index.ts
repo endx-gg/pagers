@@ -35,17 +35,25 @@ export abstract class TextInputHandle implements ITextInputHandle {
     throw new Error("Method not implemented.");
   }
 
-  async testImplementsBasicBehaviour(options: ITestOptions): Promise<void> {
+  async testHandleImplementsBasicBehaviour(options: ITestOptions): Promise<void> {
     options.assertEquals(await this.getValue(), null);
     await this.setValue("test");
     options.assertEquals(await this.getValue(), "test");
   }
 
-  async testImplementsErrorsBehaviour(errorFlow: () => Promise<string>, options: ITestOptions): Promise<void> {
+  async testHandleImplementsErrorsBehaviour(errorFlow: () => Promise<string>, options: ITestOptions): Promise<void> {
     options.assertEquals(await this.hasError(), false);
     options.assertEquals(await this.getErrorMessage(), null);
     const errorMessage = await errorFlow();
     options.assertEquals(await this.hasError(), true);
     options.assertEquals(await this.getErrorMessage(), errorMessage);
+  }
+
+  async testHandleImplementsFocusBehaviour(options: ITestOptions): Promise<void> {
+    options.assertEquals(await this.isFocused(), false);
+    await this.focus();
+    options.assertEquals(await this.isFocused(), true);
+    await this.blur();
+    options.assertEquals(await this.isFocused(), false);
   }
 }

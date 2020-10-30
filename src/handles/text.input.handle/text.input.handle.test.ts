@@ -12,7 +12,7 @@ test("implements basic behaviour", async (t) => {
     context: { handle },
   } = t;
 
-  await handle.testImplementsBasicBehaviour({ assertEquals: t.deepEqual });
+  await handle.testHandleImplementsBasicBehaviour({ assertEquals: t.deepEqual });
 });
 
 test("implements errors behaviour", async (t) => {
@@ -20,7 +20,7 @@ test("implements errors behaviour", async (t) => {
     context: { handle },
   } = t;
 
-  await handle.testImplementsErrorsBehaviour(
+  await handle.testHandleImplementsErrorsBehaviour(
     async () => {
       handle.setValue("value that causes an error");
       return "Error";
@@ -31,21 +31,12 @@ test("implements errors behaviour", async (t) => {
   );
 });
 
-test("#focus focuses input", async (t) => {
+test("implements focus behaviour", async (t) => {
   const {
     context: { handle },
   } = t;
 
-  await handle.focus();
-  t.true(await handle.isFocused());
-});
-
-test("#blur blurs input", async (t) => {
-  const {
-    context: { handle },
-  } = t;
-
-  await handle.focus();
-  await handle.blur();
-  t.false(await handle.isFocused());
+  await handle.testHandleImplementsFocusBehaviour({
+    assertEquals: t.deepEqual,
+  });
 });
