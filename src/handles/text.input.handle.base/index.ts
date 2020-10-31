@@ -1,4 +1,5 @@
 import { IInputHandle } from "../input.handle";
+import { MethodNotImplementedError } from "../methodNotImplemented.error";
 
 export interface ITextInputHandle extends IInputHandle {
   getValue(): Promise<string | null>;
@@ -26,25 +27,25 @@ export class TextInputHandleBase implements ITextInputHandle {
     throw new Error("Method not implemented.");
   }
   getValue(): Promise<string | null> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("getValue");
   }
   getErrorMessage(): Promise<string | null> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("getErrorMessage");
   }
   blur(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("blur");
   }
   setValue(value: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("setValue");
   }
   focus(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("focus");
   }
   hasError(): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("hasError");
   }
   isFocused(): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    throw new MethodNotImplementedError("isFocused");
   }
 
   async testHandleImplementsBasicBehaviour(options: ITestOptions): Promise<void> {
