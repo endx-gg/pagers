@@ -1,5 +1,5 @@
 import anyTest, { TestInterface } from "ava";
-import { TestTextInputHandle } from "./test.handle";
+import { TestTextInputHandle } from "./test.text.input.handle";
 
 const test = anyTest as TestInterface<{ handle: TestTextInputHandle }>;
 

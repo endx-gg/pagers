@@ -1,6 +1,6 @@
-import { TextInputHandle } from ".";
+import { TextInputHandleBase } from ".";
 
-export class TestTextInputHandle extends TextInputHandle {
+export class TestTextInputHandle extends TextInputHandleBase {
   private value: string | null = null;
   private error: string | null = null;
   private _isFocused: boolean = false;

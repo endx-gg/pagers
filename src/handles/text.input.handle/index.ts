@@ -15,14 +15,14 @@ interface ITestOptions {
   assertEquals: <T>(actual: T, expected: T) => void;
 }
 
-export class TextInputHandle implements ITextInputHandle {
-  static async findByTestId(): Promise<TextInputHandle> {
+export class TextInputHandleBase implements ITextInputHandle {
+  static async findByTestId(): Promise<TextInputHandleBase> {
     throw new Error("Method not implemented.");
   }
-  static async findByPlaceholder(): Promise<TextInputHandle> {
+  static async findByPlaceholder(): Promise<TextInputHandleBase> {
     throw new Error("Method not implemented.");
   }
-  static async findByLabel(): Promise<TextInputHandle> {
+  static async findByLabel(): Promise<TextInputHandleBase> {
     throw new Error("Method not implemented.");
   }
   getValue(): Promise<string | null> {
