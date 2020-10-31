@@ -16,7 +16,7 @@ interface ITestOptions {
 }
 
 export class TextInputHandle implements ITextInputHandle {
-  static async findByTestID(): Promise<TextInputHandle> {
+  static async findByTestId(): Promise<TextInputHandle> {
     throw new Error("Method not implemented.");
   }
   static async findByPlaceholder(): Promise<TextInputHandle> {
