@@ -23,5 +23,22 @@
         "src/": "lib/"
       }
     }
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elpassion/pagers.git"
+  },
+  "keywords": [
+    "test",
+    "page",
+    "object"
+  ],
+  "bugs": {
+    "url": "https://github.com/elpassion/pagers/issues"
+  },
+  "homepage": "https://github.com/elpassion/pagers#readme"
 }
