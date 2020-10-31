@@ -6,13 +6,25 @@ export interface ITextInputHandle extends IInputHandle {
   blur(): Promise<void>;
   setValue(value: string): Promise<void>;
   focus(): Promise<void>;
+  testHandleImplementsBasicBehaviour(options: ITestOptions): Promise<void>;
+  testHandleImplementsErrorsBehaviour(errorFlow: () => Promise<string>, options: ITestOptions): Promise<void>;
+  testHandleImplementsFocusBehaviour(options: ITestOptions): Promise<void>;
 }
 
 interface ITestOptions {
   assertEquals: <T>(actual: T, expected: T) => void;
 }
 
-export abstract class TextInputHandle implements ITextInputHandle {
+export class TextInputHandle implements ITextInputHandle {
+  static async findByTestID(): Promise<TextInputHandle> {
+    throw new Error("Method not implemented.");
+  }
+  static async findByPlaceholder(): Promise<TextInputHandle> {
+    throw new Error("Method not implemented.");
+  }
+  static async findByLabel(): Promise<TextInputHandle> {
+    throw new Error("Method not implemented.");
+  }
   getValue(): Promise<string | null> {
     throw new Error("Method not implemented.");
   }
