@@ -1,6 +1,6 @@
 {
   "name": "@elpassion/pagers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reusable test helpers for interface testing",
   "main": "lib/index.js",
   "scripts": {
